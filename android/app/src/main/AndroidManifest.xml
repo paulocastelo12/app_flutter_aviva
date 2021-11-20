@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aviva_castelodev.avivaapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="avivaapp"
         android:icon="@mipmap/ic_launcher">
