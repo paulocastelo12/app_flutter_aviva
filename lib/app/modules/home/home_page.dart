@@ -29,31 +29,55 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             letterSpacing: 1.0,
           ),
         ),
+        actions: <Widget>[
+          Observer(builder: (_) {
+            return Center(
+              child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: store.listdisciple != null
+                      ? Text(
+                          " ${store.listdisciple.length}",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color:
+                                  genericFunctions.getColorFromHex("#f38633")),
+                        )
+                      : Text("0",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: genericFunctions
+                                  .getColorFromHex("#f38633")))),
+            );
+          }),
+        ],
       ),
       body: Observer(builder: (_) {
         if (store.listdisciple == null) {
-          return Container(
-            child: const Center(child: CircularProgressIndicator()),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
-         if (store.listdisciple.isEmpty) {
-           return Container();
-         }
+        if (store.listdisciple.isEmpty) {
+          return Container();
+        }
 
         return ListView.builder(
             itemCount: store.listdisciple.length,
             itemBuilder: (_, int index) {
-
               DiscipleModel disciple = store.listdisciple[index];
 
               return ListTile(
-                onTap: () => {Modular.to.pushNamed("/details_disciple/", arguments: disciple )},
-                title:
-                    Text(disciple.name, style: GoogleFonts.notoSans()),
+                onTap: () async {
+                  var nav = await Modular.to
+                      .pushNamed("/details_disciple/", arguments: disciple);
+                  if (nav == true) {
+                    store.getDisciple();
+                  }
+                },
+                title: Text(disciple.name,
+                    style: GoogleFonts.notoSans(fontSize: 18)),
                 subtitle: Text(
-                 disciple.phone,
-                  style: GoogleFonts.notoSans(),
+                  disciple.phone,
+                  style: GoogleFonts.notoSans(fontSize: 18),
                 ),
                 contentPadding: const EdgeInsets.only(left: 10, right: 10),
                 trailing: const Icon(Icons.keyboard_arrow_right),
@@ -62,8 +86,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: genericFunctions.getColorFromHex("#f38633"),
-        onPressed: () {
-          Modular.to.pushNamed("/register_disciple/");
+        onPressed: () async {
+          var nav = await Modular.to.pushNamed("/register_disciple/");
+
+          if (nav == true || nav == null) {
+            store.getDisciple();
+          }
         },
         child: const Icon(
           Icons.add,

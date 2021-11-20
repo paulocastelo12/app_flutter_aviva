@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:avivaapp/app/modules/registerdisciple/registerdisciple_store.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterdisciplePage extends StatefulWidget {
   final String title;
@@ -21,10 +22,16 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
   GenericFunctions genericFunctions = GenericFunctions();
   final _formKey = GlobalKey<FormState>();
 
+  var maskFormatter =  MaskTextInputFormatter(mask: '(##) #####-#####', filter: { "#": RegExp(r'[0-9]') });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading:  IconButton(
+          icon:  const Icon(Icons.arrow_back),
+          onPressed: (){Navigator.pop(context, store.isboolnewUser);}
+        ),
         title: Text(
           'Novo Discípulo Aviva',
           style: GoogleFonts.anton(
@@ -54,7 +61,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: "Nome:"),
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                     onSaved: store.setNome,
                     validator: (value) {
                       if (value.isEmpty) {
@@ -67,8 +74,10 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                     height: 8,
                   ),
                   TextFormField(
+                    inputFormatters: [maskFormatter],
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(labelText: "Telefone:"),
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                     onSaved: store.setTelefone,
                     validator: (value) {
                       if (value.isEmpty) {
@@ -84,7 +93,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                     return DropdownButton<String>(
                         hint: const Text(
                           "Selecione Sexo",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 18),
                         ),
                         isExpanded: true,
                         items: store.cxsexo.map((String dropDownStringItem) {
@@ -103,7 +112,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                     return DropdownButton<String>(
                         hint: const Text(
                           "Selecione Faixa Etária",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 18),
                         ),
                         isExpanded: true,
                         items:
@@ -134,7 +143,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                     return DropdownButton(
                       hint: const Text(
                         "Selecione Bairro",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 18),
                       ),
                       isExpanded: true,
                       value: store.bairro,
@@ -154,7 +163,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: "Rua:"),
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                     onSaved: store.setRua,
                     validator: (value) {
                       if (value.isEmpty) {
@@ -168,7 +177,7 @@ class RegisterdisciplePageState extends State<RegisterdisciplePage> {
                   ),
                   TextFormField(
                     decoration: const InputDecoration(labelText: "N°:"),
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                     onSaved: store.setNumero,
                     validator: (value) {
                       if (value.isEmpty) {

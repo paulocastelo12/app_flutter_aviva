@@ -1,4 +1,5 @@
 import 'package:avivaapp/app/modules/detailsdisciple/detailsdisciple_module.dart';
+import 'package:avivaapp/app/modules/detailsdisciple/repositories/detailsdisciple_repository.dart';
 import 'package:avivaapp/app/modules/home/home_module.dart';
 import 'package:avivaapp/app/modules/login/login_module.dart';
 import 'package:avivaapp/app/modules/registerdisciple/registerdisciple_module.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'core/auth/auth_store_store.dart';
 import 'core/auth/repositories/auth_repository.dart';
 import 'core/auth/repositories/auth_repository_interface.dart';
+import 'modules/detailsdisciple/repositories/detailsdisciple_repository_interface.dart';
 import 'modules/home/repositories/home_repository.dart';
 import 'modules/home/repositories/home_repository_interface.dart';
 import 'modules/registerdisciple/repositories/registerdisciple_repository.dart';
@@ -20,7 +22,8 @@ class AppModule extends Module {
      Bind((i) => AuthStoreStore()),
      Bind<IAuthRepository>((i) => AuthRepository(i.get<Dio>())),
      Bind<IHomeRepository>((i) => HomeRepository(i.get<Dio>())),
-     Bind<IRegisterdiscipleRepository>((i) => RegisterdiscipleRepository(i.get<Dio>()))
+     Bind<IRegisterdiscipleRepository>((i) => RegisterdiscipleRepository(i.get<Dio>())),
+     Bind<IDetailsdiscipleRepository>((i) => DetailsdiscipleRepository(i.get<Dio>()))
   ];
 
   @override

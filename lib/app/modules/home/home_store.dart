@@ -27,6 +27,8 @@ abstract class HomeStoreBase with Store {
   Future getDisciple() async {
     loading = true;
 
+    listdisciple = null;
+
     var list = await _homeRepository.getDisciple(_authStoreStore.user.sId);
     listdisciple = list.asObservable();
     

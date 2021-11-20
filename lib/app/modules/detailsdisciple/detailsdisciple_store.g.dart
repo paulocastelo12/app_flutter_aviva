@@ -9,39 +9,32 @@ part of 'detailsdisciple_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsdiscipleStore on _DetailsdiscipleStoreBase, Store {
-  final _$valueAtom = Atom(name: '_DetailsdiscipleStoreBase.value');
+  final _$loadingAtom = Atom(name: '_DetailsdiscipleStoreBase.loading');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
-  final _$_DetailsdiscipleStoreBaseActionController =
-      ActionController(name: '_DetailsdiscipleStoreBase');
+  final _$deleteAsyncAction = AsyncAction('_DetailsdiscipleStoreBase.delete');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_DetailsdiscipleStoreBaseActionController
-        .startAction(name: '_DetailsdiscipleStoreBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_DetailsdiscipleStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future<String> delete(String idDisciple) {
+    return _$deleteAsyncAction.run(() => super.delete(idDisciple));
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+loading: ${loading}
     ''';
   }
 }

@@ -1,5 +1,4 @@
 import 'package:avivaapp/app/core/auth/auth_store_store.dart';
-import 'package:avivaapp/app/modules/home/repositories/home_repository_interface.dart';
 import 'package:avivaapp/app/shared/components/snackbar_global.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -14,6 +13,8 @@ class RegisterdiscipleStore = _RegisterdiscipleStoreBase
 abstract class _RegisterdiscipleStoreBase with Store {
   final IRegisterdiscipleRepository _resgiterdiscipleRepository = Modular.get();
   final AuthStoreStore _authStoreStore = Modular.get();
+
+  bool isboolnewUser = false;
 
   @observable
   bool loading = false;
@@ -69,6 +70,7 @@ abstract class _RegisterdiscipleStoreBase with Store {
 
     if (result == "Ok") {
       GlobalSnackBar.instance.showSnackBarSuccess("Registrado c/ sucesso!");
+      isboolnewUser = true;
       clearFields();
       return result;
     }

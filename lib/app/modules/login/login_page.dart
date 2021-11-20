@@ -94,18 +94,6 @@ class LoginPageState extends State<LoginPage> {
                                 },
                               );
                             }),
-                             const SizedBox(
-                              height: 32,
-                            ),
-                            Text(
-                              "Novo Usuário? Cadastre-se aqui!",
-                              style: TextStyle(
-                                color:
-                                    genericFunctions.getColorFromHex("#f38633"),
-                                fontSize: 16,
-                                letterSpacing: 1.0,
-                              ),
-                            ),
                             const SizedBox(
                               height: 32,
                             ),
